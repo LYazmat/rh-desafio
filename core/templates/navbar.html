@@ -1,0 +1,42 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top border-bottom">
+    <a class="navbar-brand" href="/">
+        <div class="logo-image">
+            <img alt="Desafio RH!" src="{% static 'general/images/logo.png' %}" class="img-fluid">
+        </div>
+    </a>
+    {% if user.is_authenticated %}
+        <div class="text-center login-view-navbar" style="max-width: 40%;"><i
+                class="text-success fas fa-user-check mr-1"></i>Bem vindo, {{ user.first_name }} {{ user.last_name }}.
+        </div>
+    {% endif %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Cadastros
+                    </a>
+                    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                        <li><a class="dropdown-item" href="{% url 'core:company' %}">Empresas</a></li>
+                        <li><a class="dropdown-item" href="#">Departamentos</a></li>
+                        <li><a class="dropdown-item" href="#">Empregados</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <span><span class="collapse navbar-collapse"><i
+                    class="text-success fas fa-user-check mr-1"></i>Bem vindo, {{ user.first_name }} {{ user.last_name }}. </span></span>
+            <a href="#" class="nav-link text-dark"><i class="fas fa-sign-out-alt"> </i> LOGOUT </a>
+        {% else %}
+            <a href="#" class="ml-auto nav-link text-dark"><i class="fas fa-sign-in-alt"> </i> LOGIN
+            </a>
+        {% endif %}
+    </div>
+</nav>

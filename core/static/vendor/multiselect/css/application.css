@@ -1,0 +1,55 @@
+.navbar .brand{
+  padding: 9px 20px 8px;
+}
+
+.navbar iframe{
+  float: left;
+  margin: 10px 0px 0px 1em;
+}
+
+.brand span{
+  font-size: 0.6em;
+  color: #aaa;
+}
+
+
+#contributors ul{
+  margin: 0;
+}
+
+#contributors li{
+  list-style-type: none;
+  padding: 5px 0px;
+}
+
+#contributors img{
+  border: 1px #ddd solid;
+  padding: 1px;
+}
+
+ul.contribute li{
+  padding: 5px 0px;
+  font-size: 15px;
+}
+
+.custom-header{
+  text-align: center;
+  padding: 3px;
+  background: #0055A1;
+  color: #fff;
+}
+
+#ms-searchable.ms-container{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  background-position: 50% 50%;
+}
+
+input.search-input{
+  box-sizing: border-box;
+  -moz-box-sizing:border-box;
+  width: 100%;
+  margin-bottom: 5px;
+  height: auto;
+}

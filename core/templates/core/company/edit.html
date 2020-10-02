@@ -1,0 +1,83 @@
+{% load crispy_forms_tags %}
+
+<form method="POST" action="{% url 'core:edit-company' form.instance.pk %}" class="js-edit-form"
+      enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal-header">
+        <h4 class="modal-title">Cadastrar Empresa</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        {% if form.non_field_errors %}
+            <div class="alert alert-block alert-danger">
+                <ul>
+                    {% for err in form.non_field_errors %}
+                        <li class="form-error">{{ err }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <div class="col-md-7">
+                <div class=" col-md-12 mb-0">
+                    {{ form.name|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-12 mb-0">
+                    {{ form.legal_number|as_crispy_field }}
+                </div>
+            </div>
+            <div id="group-logo" class="col-md-5 mb-0" style="line-break: auto;">
+                <div class="text-center"><img id="logo-comp" src="{{ form.instance.logo.url }}" alt="Logo" width="50%"/>
+                </div>
+                {{ form.logo }}
+                {% if form.logo.errors %}
+                    <div class="alert alert-block alert-danger">
+                        <ul>
+                            {% for err in form.logo.errors %}
+                                <li class="form-error">{{ err }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span data-url="#" title="Remover Empresa" data-toggle="tooltip"
+                      class="js-delete btn-sm dark-on-hover" style="cursor: pointer;">
+                    <i class="fas fa-trash text-danger "></i> Remover Registro</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success">Salvar</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#logo-comp').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#id_logo").change(function () {
+            readURL(this);
+        });
+
+        $('#modal-include .form-control').addClass('form-control-sm');
+        $('#modal-include label').addClass('col-form-label col-form-label-sm');
+        $('#group-logo a').text('...' + $('#group-logo a').text().slice(-15));
+        $('#group-logo a').attr('target', '_blank');
+
+    });
+</script>

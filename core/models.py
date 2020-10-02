@@ -8,6 +8,9 @@ from django.db import models
 
 class Company(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    logo = models.ImageField('Logo', null=True, upload_to='company/', blank=True)
+    name = models.CharField('Nome', max_length=100)
+    legal_number = models.CharField('CNPJ', null=True, blank=True, max_length=25)
 
     # This is auto created and updated date
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -15,6 +18,13 @@ class Company(models.Model):
 
     create_user = models.UUIDField(editable=False, null=True)
     update_user = models.UUIDField(editable=False, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Companies'
+        verbose_name = 'Company'
+
+    def __str__(self):
+        return ' - '.join([self.name, str(self.id)])
 
 
 class Department(models.Model):
@@ -34,10 +44,9 @@ class Employee(models.Model):
     name = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.PROTECT)
     GENDER = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('O', 'Others')
-
+        ('M', 'Homem'),
+        ('F', 'Mulher'),
+        ('O', 'Outros')
     )
     gender = models.CharField(max_length=1, choices=GENDER)
     # department = models.ForeignKey(Department, on_delete=models.PROTECT)

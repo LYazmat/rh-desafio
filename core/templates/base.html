@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}Desafio RH!{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{% static 'general/images/logo.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'general/images/logo.ico' %}" type="image/x-icon">
+
+    <link href="{% static 'vendor/fontawesome/css/fontawesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/fontawesome/css/solid.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/fontawesome/css/brands.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/fontawesome/css/regular.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/fontawesome/css/duotone.min.css' %}" rel="stylesheet">
+    <link href="{% static 'navmenu/css/navbar.css' %}" rel="stylesheet">
+    <link href="{% static 'core/base/css/base.css' %}" rel="stylesheet">
+
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="container col-md-12">
+    <div id="page-content bg-danger">
+        {% include 'navbar.html' %}
+        <div class="row mt-4 mb-4"></div>
+        <div class="container-fluid mt-3">
+            <br>
+            {% block content %}
+                <div class="col-md-6 mx-auto my-auto text-center">
+                    <img class="mt-3 w-50 h-50" src="{% static 'general/images/human-resources.png' %}"
+                         alt="Desafio RH">
+                    <p style="margin-top: -20px; color: #08569E; font-size: xx-large"><span
+                            style="font-family: FonteRunaway;">Desafio RH!</span> <span class="fas fa-lightbulb"
+                                                                                        style="transform: rotate(20deg); color: #ffc107;"></span>
+                    </p>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<footer class="pt-5 pr-2 text-muted text-center fixed-bottom small">
+    <p class="mb-1">&copy; 2017-2020 Test&Deploy Company</p>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="https://github.com/LYazmat" target="_blank" class="text-dark"><i class="fab fa-github"></i> GitHub</a>
+        </li>
+        <li class="list-inline-item"><a href="https://www.linkedin.com/in/marcus-vinicius-de-miranda" target="_blank" class="text-dark"><i class="fab fa-linkedin text-primary"></i> Linkedin</a>
+        </li>
+        <li class="list-inline-item"><a href="https://www.instagram.com/marcusmiran/" target="_blank" class="text-dark"><i class="instagram fab fa-instagram"></i> Instagram</a>
+        </li>
+    </ul>
+</footer>
+
+<script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'core/base/js/base.js' %}"></script>
+
+{% block javascript %}
+{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+th.dt-center, td.dt-center {
+    text-align: center;
+}
+
+table.dataTable tbody td {
+    font-size: small;
+    vertical-align: middle;
+}
+
+tfoot {
+    display: table-header-group;
+}
+
+.dark-on-hover:hover {
+    filter: brightness(0.5);
+}
+
+.modal-lg {
+    min-width: 60% !important;
+}
+
+.modal-body{
+  word-break: break-all;
+}
+
+input[type=file] {
+    font-size: smaller;
+    width: 100%;
+}
