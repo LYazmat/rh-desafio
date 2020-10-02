@@ -45,6 +45,14 @@ $(function () {
         });
     };
 
+    var current_form;
+    var loadConfirm = function () {
+        current_form = this;
+        $("#modal-confirm .modal-content").html(data.html_form);
+        $("#modal-confirm").modal("show");
+        return false;
+    };
+
     // Open Modal and Save - Company
     $(".js-new").click(loadForm);
     $("#modal-include").on('submit', '.js-new-form', saveForm);
@@ -53,10 +61,10 @@ $(function () {
     $("#table").on("click", ".js-edit", loadForm);
     $("#modal-include").on('submit', '.js-edit-form', saveForm);
 
-/*
-            // Deletar
-            $("#tabela-curso").on("click", ".js-deletar-curso", loadForm);
-            $("#modal-curso").on('submit', '.js-curso-deletar-form', saveForm);*/
+    /*
+                // Deletar
+                $("#tabela-curso").on("click", ".js-deletar-curso", loadForm);
+                $("#modal-curso").on('submit', '.js-curso-deletar-form', saveForm);*/
 
 
 });

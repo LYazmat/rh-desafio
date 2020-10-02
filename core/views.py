@@ -62,3 +62,15 @@ def edit_company(request, pk):
     c = get_object_or_404(Company, pk=pk)
     form = FormCompany(request.POST or None, request.FILES if request.method == 'POST' else None, instance=c)
     return save_company(request, form, 'core/company/edit.html')
+
+
+def delete_company(request, pk):
+    c = get_object_or_404(Company, pk=pk)
+    data = dict()
+    try:
+        c.delete()
+        data['form_is_valid'] = True
+    except Exception:
+        form = FormCompany(request.POST or None, request.FILES if request.method == 'POST' else None, instance=c)
+        data['form_is_valid'] = False
+    return save_company(request, form, 'core/company/edit.html')
