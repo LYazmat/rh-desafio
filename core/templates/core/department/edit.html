@@ -1,0 +1,91 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<form method="POST" action="{% url 'core:edit-department' form.instance.pk %}" class="js-edit-form">
+    {% csrf_token %}
+    <div class="modal-header">
+        <h4 class="modal-title">Editar Departamento</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        {% if form.non_field_errors %}
+            <div class="alert alert-block alert-danger">
+                <ul>
+                    {% for err in form.non_field_errors %}
+                        <li class="form-error">{{ err }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <div id="group-logo" class="col-md-4 mb-0" style="line-break: auto;">
+                <div class="text-center">
+                    {% if form.instance.company.logo %}
+                        <img id="logo-comp" src="{{ form.instance.company.logo.url }}" alt="Logo" width="50%"/>
+                    {% else %}
+                        <img id="logo-comp" src="{% static 'general/images/no-logo.png' %}" alt="Logo"
+                             width="50%"/>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group col-md-12 mb-0">
+                    {{ form.company|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-12 mb-0">
+                    {{ form.name|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-12 mb-0">
+                    {{ form.admin|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-12 mb-0">
+                    {{ form.status|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span data-url="{% url 'core:delete-department' form.instance.pk %}" title="Remover Departamento"
+                      data-toggle="tooltip"
+                      class="js-delete btn-sm dark-on-hover" style="cursor: pointer;">
+                    <i class="fas fa-trash text-danger "></i> Remover Registro</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success">Salvar</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        var no_logo = '{% static 'general/images/no-logo.png' %}';
+
+        $('#modal-include #id_company').change(function () {
+            if ($('#modal-include #id_company').val() !== '') {
+                $.ajax({
+                    url: '/company/logo/' + $('#modal-include #id_company').val(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.url === null) {
+                            $('#modal-include #logo-comp').attr('src', no_logo);
+                        } else {
+                            $('#modal-include #logo-comp').attr('src', data.url);
+                        }
+                    }
+                });
+            } else {
+                $('#modal-include #logo-comp').attr('src', no_logo);
+            }
+        });
+
+        $('#modal-include .form-control').addClass('form-control-sm');
+        $('#modal-include label').addClass('col-form-label col-form-label-sm');
+
+    });
+</script>

@@ -62,32 +62,31 @@ $(function () {
         });
     };
 
-        /**
-         *
-         * Implementation coming soon
-         *
-         var current_form;
-         var loadConfirm = function () {
+    /**
+     *
+     * Implementation coming soon
+     *
+    var current_form;
+    var loadConfirm = function () {
         current_form = this;
         $("#modal-confirm .modal-content").html(data.html_form);
         $("#modal-confirm").modal("show");
         return false;
     };
-         **/
+     **/
 
-        // Open Modal and Save - Company
-        $(".js-new").click(loadForm);
-        $("#modal-include").on('submit', '.js-new-form', saveForm);
+    // Open Modal and Save - Company
+    $(".js-new").click(loadForm);
+    $("#modal-include").on('submit', '.js-new-form', saveForm);
 
-        // Open Modal and Edit - Company
-        $("#table").on("click", ".js-edit", loadForm);
-        $("#modal-include").on('submit', '.js-edit-form', saveForm);
+    // Open Modal and Edit - Company
+    $("#table").on("click", ".js-edit", loadForm);
+    $("#modal-include").on('submit', '.js-edit-form', saveForm);
 
-        // Delete - Company
-        $("#modal-include").on('click', '.js-delete', deleteForm);
+    // Delete - Company
+    $("#modal-include").on('click', '.js-delete', deleteForm);
 
-    }
-);
+});
 
 
 $(document).ready(function () {
@@ -103,18 +102,24 @@ $(document).ready(function () {
         },
         order: [[0, "asc"]],
         columns: [
+            {
+                data: "status", searchable: false, orderable: false,
+                render: function (data, type, row) {
+                    return '<i class="' + (data ? 'text-success': 'text-danger') + ' small fas fa-circle"></i>';
+                }
+            },
             {data: "name"},
-            {data: "legal_number"},
+            {data: "admin"},
         ],
         columnDefs: [
             {
-                className: "dt-center", targets: []
+                className: "dt-center", targets: [0]
             }
         ],
         //Edit company clicking on roll
         createdRow: function (row, data, dataIndex) {
             $(row).css({'cursor': 'pointer'});
-            $(row).attr({'data-url': '/company/' + data.id});
+            $(row).attr({'data-url': '/company/department/' + data.id});
             $(row).addClass('js-edit');
         }
     });

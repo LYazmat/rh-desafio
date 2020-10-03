@@ -3,34 +3,36 @@
 
 {% block css %}
     <link href="{% static 'vendor/datatable/datatables.min.css' %}" rel="stylesheet">
-    <link href="{% static 'core/company/css/company.css' %}" rel="stylesheet">
+    <link href="{% static 'core/department/css/department.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-    <h2 class="mt-1 text-dark text-center">CADASTROS DE EMPRESAS</h2>
+    <h2 class="mt-1 text-dark text-center">CADASTROS DE DEPARTAMENTOS</h2>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="dropdown-divider"></div>
             <p class="text-left mt-2">
                 <button type="button" class="mr-2 btn btn-light btn-sm js-new border-dark"
-                        data-url="{% url 'core:new-company' %}"><i
+                        data-url="{% url 'core:new-department' %}"><i
                         class="fas fa-plus-circle mr-2"></i>Novo
                 </button>
             </p>
-            <table data-url="{% url 'core:data-company' %}" id="table"
+            <table data-url="{% url 'core:data-department' %}" id="table"
                    class="table table-hover table-sm bg-white display" cellspacing="0"
                    cellpadding="0"
                    style="border: none;" width="100%">
                 <thead style="background: #08569E;" class="text-white text-center table-borderless">
                 <tr>
+                    <th></th>
                     <th>Nome</th>
-                    <th>CNPJ</th>
+                    <th>Administrador</th>
                 </tr>
                 </thead>
                 <tbody>
                 </tbody>
                 <tfoot hidden>
                 <tr>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -61,5 +63,5 @@
 {% block javascript %}
     <script src="{% static 'vendor/datatable/datatables.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'vendor/jquery-mask/jquery.mask.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'core/company/js/company.js' %}" type="text/javascript"></script>
+    <script src="{% static 'core/department/js/department.js' %}" type="text/javascript"></script>
 {% endblock %}

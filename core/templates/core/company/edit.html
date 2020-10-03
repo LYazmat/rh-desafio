@@ -5,14 +5,14 @@
       enctype="multipart/form-data">
     {% csrf_token %}
     <div class="modal-header">
-        <h4 class="modal-title">Cadastrar Empresa</h4>
+        <h4 class="modal-title">Editar Empresa</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         {% if form.non_field_errors %}
-            <div class="alert alert-block alert-danger">
+            <div class="alert alert-block alert-danger message-error">
                 <ul>
                     {% for err in form.non_field_errors %}
                         <li class="form-error">{{ err }}</li>
@@ -51,7 +51,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <span data-url="#" title="Remover Empresa" data-toggle="tooltip"
+                <span data-url="{% url 'core:delete-company' form.instance.pk %}" title="Remover Empresa" data-toggle="tooltip"
                       class="js-delete btn-sm dark-on-hover" style="cursor: pointer;">
                     <i class="fas fa-trash text-danger "></i> Remover Registro</span>
             </div>

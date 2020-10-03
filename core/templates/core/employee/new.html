@@ -1,0 +1,111 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<form method="POST" action="{% url 'core:new-employee' %}" class="js-new-form">
+    {% csrf_token %}
+    <div class="modal-header">
+        <h4 class="modal-title">Cadastrar Employee</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        {% if form.non_field_errors %}
+            <div class="alert alert-block alert-danger">
+                <ul>
+                    {% for err in form.non_field_errors %}
+                        <li class="form-error">{{ err }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <div class="col-md-12">
+                <div class="form-row col-md-12">
+                    <div id="group-logo bg-dark" class="d-flex col-md-2 mb-0">
+                        <div class="text-center my-auto">
+                            <img id="logo-comp" src="{% static 'general/images/no-logo.png' %}" alt="Logo" width="90%"/>
+                        </div>
+                    </div>
+                    <div class="col-md-10 mb-0">
+                        <div class="form-row">
+                            <div class="form-group col-md-7 mb-0">
+                                {{ form.name|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-5 mb-0">
+                                {{ form.user|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-0">
+                                {{ form.department|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-0">
+                                {{ form.role|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row col-md-12">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.joining_date|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.salary|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row col-md-12">
+                    <div class="form-group col-md-3 mb-0">
+                        {{ form.age|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.gender|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-5 mb-0">
+                        {{ form.phone|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row col-md-12">
+                    <div class="form-group col-md-12 mb-0">
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        var no_logo = '{% static 'general/images/no-logo.png' %}';
+
+        $('#modal-include #id_department').change(function () {
+            if ($('#modal-include #id_department').val() !== '') {
+                $.ajax({
+                    url: '/company/department/logo/' + $('#modal-include #id_department').val(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.url === null) {
+                            $('#modal-include #logo-comp').attr('src', no_logo);
+                        } else {
+                            $('#modal-include #logo-comp').attr('src', data.url);
+                        }
+                    }
+                });
+            } else {
+                $('#modal-include #logo-comp').attr('src', no_logo);
+            }
+        });
+
+        if ($("#id_logo").val() !== '' || $("#id_logo").val() !== '') {
+            $("#id_logo").change();
+        }
+
+        $('#modal-include .form-control').addClass('form-control-sm');
+        $('#modal-include label').addClass('col-form-label col-form-label-sm')
+    });
+</script>

@@ -103,8 +103,17 @@ $(document).ready(function () {
         },
         order: [[0, "asc"]],
         columns: [
+            {
+                data: "gender", searchable: false, orderable: false,
+                render: function (data, type, row) {
+                    var gender = data === 'M' ? 'fas fa-mars': data === 'F' ? 'fas fa-venus' : 'fas fa-transgender';
+                    return '<i class="small ' + gender + '"></i>';
+                }
+            },
             {data: "name"},
-            {data: "legal_number"},
+            {data: "role"},
+            {data: "department"},
+            {data: "company"},
         ],
         columnDefs: [
             {
@@ -114,7 +123,7 @@ $(document).ready(function () {
         //Edit company clicking on roll
         createdRow: function (row, data, dataIndex) {
             $(row).css({'cursor': 'pointer'});
-            $(row).attr({'data-url': '/company/' + data.id});
+            $(row).attr({'data-url': '/company/department/employee/' + data.id});
             $(row).addClass('js-edit');
         }
     });
